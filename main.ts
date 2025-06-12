@@ -16,6 +16,11 @@ function showPlayfulPet () {
 }
 input.onButtonPressed(Button.A, function () {
     basic.showIcon(IconNames.Heart)
+    basic.pause(1000)
+    petHunger = 0
+    petHappiness = Math.min(10, petHappiness + 2)
+    ShowHappyPet()
+    basic.pause(500)
 })
 input.onButtonPressed(Button.B, function () {
     for (let index = 0; index < 3; index++) {
@@ -62,5 +67,12 @@ basic.forever(function () {
     petEnergy = Math.max(0, petEnergy - 1)
     if (petHunger > 3) {
         showHungryPet()
+        basic.pause(2000)
+    } else if (petEnergy < 2) {
+        showTiredPet()
+        basic.pause(2000)
+    }
+    if (petHappiness > 5) {
+        ShowHappyPet()
     }
 })
